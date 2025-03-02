@@ -6,38 +6,38 @@ import numpy as np
 app = Flask(__name__)
 
 # Enable CORS for all routes
-# CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})  # Only allow your React app to access the Flask API
 CORS(app, resources={r"/*": {"origins": "*"}})
+
+# Load and preprocess the dataset once (outside the route for efficiency)
+covid_df = pd.read_csv('Covid-19 Twitter Dataset (Apr-Jun 2020).csv')
+covid_df['created_at'] = covid_df['created_at'].astype(str)
+covid_df['created_at'] = covid_df['created_at'].replace(['0.0', 'NaN', 'None', 'null', ''], np.nan)
+covid_df['date'] = pd.to_datetime(covid_df['created_at'], errors='coerce')
+covid_df = covid_df.dropna(subset=['date'])
+covid_df['date'] = covid_df['date'].dt.strftime('%Y-%m-%d')
+
+# Group by date and compute average sentiment polarity
+covid_daily = covid_df.groupby('date')['polarity'].mean().reset_index()
+
+def add_random_variation(data, variation_percentage=0.25):
+    """
+    Apply random variation to the 'polarity' column within the given percentage.
+    """
+    variation_range = variation_percentage  # 25-30% range
+    random_factors = 1 + np.random.uniform(-variation_range, variation_range, size=len(data))
+    data['polarity'] = data['polarity'] * random_factors
+    return data
 
 @app.route('/data')
 def get_data():
-    # Load the dataset
-    covid_df = pd.read_csv('Covid-19 Twitter Dataset (Apr-Jun 2020).csv')
-
-    # Ensure 'created_at' is treated as a string
-    covid_df['created_at'] = covid_df['created_at'].astype(str)
-
-    # Replace invalid date values with NaN
-    covid_df['created_at'] = covid_df['created_at'].replace(['0.0', 'NaN', 'None', 'null', ''], np.nan)
-
-    # Convert 'created_at' to datetime
-    covid_df['date'] = pd.to_datetime(covid_df['created_at'], errors='coerce')
-
-    # Drop rows where date conversion failed
-    covid_df = covid_df.dropna(subset=['date'])
-
-    # Convert datetime to only date format (as a string to avoid JSON serialization issues)
-    covid_df['date'] = covid_df['date'].dt.strftime('%Y-%m-%d')
-
-    # Group by date and compute average sentiment polarity
-    covid_daily = covid_df.groupby(covid_df['date'])['polarity'].mean().reset_index()
+    # Apply random variation every time the endpoint is called
+    randomized_data = add_random_variation(covid_daily.copy(), variation_percentage=np.random.uniform(0.25, 0.30))
 
     # Convert to dictionary format for JSON
-    timeline_data = covid_daily.to_dict(orient='records')
+    timeline_data = randomized_data.to_dict(orient='records')
 
     # Return the data as JSON
     return jsonify(timeline_data)
 
 if __name__ == '__main__':
     app.run(debug=True)
-

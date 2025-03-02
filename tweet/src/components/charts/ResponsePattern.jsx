@@ -43,7 +43,7 @@ const ResponsePattern = () => {
   };
 
   return (
-    <div style={{ width: '100%', height: '100%', minHeight: '300px' }}>
+    <div style={{ width: '100%', height: '100%' }}>
       <Plot
         data={dataPlotly}
         layout={layout}

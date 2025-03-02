@@ -42,7 +42,7 @@ const EngagementChart = () => {
   };
 
   return (
-    <div style={{ width: '100%', maxWidth: '600px', margin: '0 auto',height:'100' }}>
+    <div style={{ width: '100%', maxWidth: '600px', margin: '0 auto',height:'100%' }}>
       <Plot
         data={dataPlotly}
         layout={layout}

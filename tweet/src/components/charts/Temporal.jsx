@@ -55,7 +55,7 @@ const Temporal = () => {
   };
 
   return (
-    <div style={{ width: '100%', maxWidth: '800px', margin: '0 auto' }}>
+    <div style={{ width: '100%', maxWidth: '800px', margin: '0 auto', height:'100%' }}>
       <Plot
         data={plotData}
         layout={layout}

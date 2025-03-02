@@ -10,7 +10,7 @@ import SentimentGauge from './charts/SentimentGauge';
 import EngagementChart from './charts/EngagementChart';
 import Behavioral from './charts/Behavioral';
 import ResponsePattern from './charts/ResponsePattern';
-const Dashboard = () => {
+const Dashboard = ({ searchQuery }) => {
   const [posts, setPosts] = useState(mockPosts);
   const [dateFilter, setDateFilter] = useState('all');
   const [platformFilter, setPlatformFilter] = useState('all');
@@ -54,11 +54,15 @@ const Dashboard = () => {
 
   return (
     <div className="container mx-auto px-4 py-6">
-      {/* Dashboard title */}
-      <div className="mb-6">
-        <h2 className="text-2xl font-bold text-pale-taupe">Dashboard Overview</h2>
-        <p className="text-gray-400">Analyzing trends for "Artificial Intelligence" across platforms</p>
-      </div>
+    {/* Dashboard title */}
+    <div className="mb-6">
+      <h2 className="text-2xl font-bold text-pale-taupe">
+        Dashboard Overview
+      </h2>
+      <p className="text-gray-400">
+        {searchQuery ? `Analyzing trends for "${searchQuery}" across platforms` : 'Analyzing trends for "Artificial Intelligence" across platforms'}
+      </p>
+    </div>
       
       {/* Data visualization section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
