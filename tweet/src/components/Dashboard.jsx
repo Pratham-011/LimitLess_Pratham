@@ -65,7 +65,7 @@ const Dashboard = () => {
         {/* Time-Series Trends */}
         <div className="bg-dark-jet rounded-lg p-4 shadow-lg">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-pale-taupe">Time-Series Trends</h3>
+            <h3 className="text-lg font-semibold text-pale-taupe">Sentiment Analysis based on Polarity</h3>
             <LineChart size={20} className="text-accent" />
           </div>
           <div className="h-64">
@@ -75,7 +75,7 @@ const Dashboard = () => {
 
         <div className="bg-dark-jet rounded-lg p-4 shadow-lg">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-pale-taupe">Time-Series Trends</h3>
+            <h3 className="text-lg font-semibold text-pale-taupe">Response Patternss</h3>
             <LineChart size={20} className="text-accent" />
           </div>
           <div className="h-64">
@@ -86,7 +86,7 @@ const Dashboard = () => {
         {/* Key Topics Bubble Chart */}
         <div className="bg-dark-jet rounded-lg p-4 shadow-lg">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-pale-taupe">Key Topics</h3>
+            <h3 className="text-lg font-semibold text-pale-taupe">Emotion Analysis </h3>
             <Activity size={20} className="text-accent" />
           </div>
           <div className="h-64">
@@ -108,7 +108,7 @@ const Dashboard = () => {
         {/* Sentiment Analysis */}
         <div className="bg-dark-jet rounded-lg p-4 shadow-lg">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-pale-taupe">Sentiment Analysis</h3>
+            <h3 className="text-lg font-semibold text-pale-taupe"> Sentiment Distribution</h3>
             <PieChart size={20} className="text-accent" />
           </div>
           <div className="h-64 flex items-center justify-center">
@@ -126,9 +126,10 @@ const Dashboard = () => {
             <EngagementChart data={platformEngagementData} />
           </div>
         </div>
+
         <div className="bg-dark-jet rounded-lg p-4 shadow-lg">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-pale-taupe">Engagement Metrics</h3>
+            <h3 className="text-lg font-semibold text-pale-taupe">Behavioral Keywords Analysis</h3>
             <BarChart size={20} className="text-accent" />
           </div>
           <div className="h-64">

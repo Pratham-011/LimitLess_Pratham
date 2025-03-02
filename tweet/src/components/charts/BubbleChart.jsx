@@ -9,7 +9,7 @@ const BubbleChart = () => {
       .then(response => response.json())
       .then(data => {
         console.log('Fetched emotion analysis data:', data);
-        // Use data.polarity directly, since your API returns it at the top level.
+        // Use data.polarity directly, since the API returns it at the top level.
         if (data && data.polarity) {
           setEmotionData(data.polarity);
         } else {
@@ -21,31 +21,34 @@ const BubbleChart = () => {
 
   if (!emotionData) return <div>Loading...</div>;
 
-  // Use summary statistics for polarity as a proxy for the distribution:
-  const categories = ['Min', '25%', '50%', '75%', 'Max'];
-  const values = [
-    emotionData.min,
-    emotionData["25%"],
-    emotionData["50%"],
-    emotionData["75%"],
-    emotionData.max
+  // Using the summary statistics to approximate a histogram:
+  // We have overall count, and quartile values: min, 25%, 50%, 75%, max.
+  // Here, we assume each quartile bin holds roughly 1/4th of the total count.
+  const totalCount = emotionData.count;
+  const approxBinCount = totalCount / 4;
+
+  const bins = [
+    { range: `${emotionData.min.toFixed(2)} to ${emotionData["25%"].toFixed(2)}`, count: approxBinCount },
+    { range: `${emotionData["25%"].toFixed(2)} to ${emotionData["50%"].toFixed(2)}`, count: approxBinCount },
+    { range: `${emotionData["50%"].toFixed(2)} to ${emotionData["75%"].toFixed(2)}`, count: approxBinCount },
+    { range: `${emotionData["75%"].toFixed(2)} to ${emotionData.max.toFixed(2)}`, count: approxBinCount },
   ];
 
   const dataPlotly = [
     {
-      x: categories,
-      y: values,
+      x: bins.map(bin => bin.range),
+      y: bins.map(bin => bin.count),
       type: 'bar',
       marker: { color: '#1f77b4' }
     }
   ];
 
   const layout = {
-    title: 'Polarity Distribution Summary',
-    xaxis: { title: 'Percentile' },
-    yaxis: { title: 'Polarity Value' },
+    title: 'Approximate Polarity Histogram',
+    xaxis: { title: 'Polarity Range' },
+    yaxis: { title: 'Estimated Count' },
     autosize: true,
-    margin: { l: 50, r: 50, b: 50, t: 50 }
+    margin: { l: 50, r: 50, b: 100, t: 50 }
   };
 
   return (
