@@ -1,0 +1,63 @@
+{
+    "Sentiment Distribution": {
+        "neutral": 0.4464243174996427,
+        "positive": 0.4175996950783744,
+        "negative": 0.13597598742198294
+    },
+    "Engagement Metrics": {
+        "Average Likes": 0.14378960407832675,
+        "Average Retweets": 1872.0753251703272,
+        "Total Tweets": 20989,
+        "Sentiment Distribution": {
+            "neutral": 0.4464243174996427,
+            "positive": 0.4175996950783744,
+            "negative": 0.13597598742198294
+        }
+    },
+    "Behavioral Keywords Analysis": {
+        "prevention": 0.10506241941108901,
+        "medical": 0.0856993354723253,
+        "social_impact": 0.07644227639323124,
+        "emotional": 0.08500426605815169
+    },
+    "Response Patterns": {
+        "mean": {
+            "Early": 0.093,
+            "Mid": 0.089,
+            "Late": 0.088
+        },
+        "std": {
+            "Early": 0.239,
+            "Mid": 0.241,
+            "Late": 0.239
+        }
+    },
+    "Temporal Evolution": {
+        "Mean": 0.08360328236110244,
+        "Std": 0.014573154311320582,
+        "Min": 0.04492628992628991,
+        "Max": 0.09346011479277967
+    },
+    "Emotion Analysis": {
+        "subjectivity": {
+            "count": 20989.0,
+            "mean": 0.3162489802542956,
+            "std": 0.3129409561462573,
+            "min": 0.0,
+            "25%": 0.0,
+            "50%": 0.3,
+            "75%": 0.5166666666666667,
+            "max": 1.0
+        },
+        "polarity": {
+            "count": 20989.0,
+            "mean": 0.09003523204279076,
+            "std": 0.23949773906437516,
+            "min": -1.0,
+            "25%": 0.0,
+            "50%": 0.0,
+            "75%": 0.2,
+            "max": 1.0
+        }
+    }
+}
